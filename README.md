@@ -15,6 +15,6 @@
 - Choisir entre les modules disponible.
 
 ## Déploiement
-
-Pour déployer le `CLI`: lancer la commande `npm init --scope=mikecodeur`.
-Pour installer le nouveau paquet: `pnpm add @mikecodeur/course-app-cli`.
+En construction, ne pas prendre en compte:
+>Pour déployer le `CLI`: lancer la commande `npm init --scope=mikecodeur`.
+>Pour installer le nouveau paquet: `pnpm add @mikecodeur/course-app-cli`.
