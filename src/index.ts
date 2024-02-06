@@ -33,7 +33,7 @@ async function main() {
         const { versionGit, versionNode, versionPkg } = enCheckVersion
         const s = spinner()
         s.start("🔧 Vérification de l'environnement")
-        const checkNode = envCheck.node(versionGit)
+        const checkNode = envCheck.node(versionNode)
         if (!checkNode) {
           throwErrorCheck("node", versionNode)
         }
