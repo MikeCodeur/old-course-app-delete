@@ -30,7 +30,7 @@ async function main() {
   await group(
     {
       environnement: async () => {
-        const {versionGit, versionNode, versionPkg} = enCheckVersion
+        const { versionGit, versionNode, versionPkg } = enCheckVersion
         const s = spinner()
         s.start("🔧 Vérification de l'environnement")
         const checkNode = envCheck.node(versionGit)
