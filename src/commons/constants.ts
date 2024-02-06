@@ -7,14 +7,17 @@ export const DIRECTORY = `${LOCAL_PATH}/src` as const
 const versionGit = "2.0" as const
 const versionNode = "18.0.0" as const
 const versionPkg = "8.0.0" as const
+const versionTs = "4.3" as const
 
 export const enCheckVersion = {
   versionGit,
   versionNode,
   versionPkg,
+  versionTs,
 } as const
 
 export const PACKAGE_MANAGER = ["npm", "pnpm", "yarn", "bun"] as const
+export const ENV_CHECK = ["git", "node", "typescript", ...PACKAGE_MANAGER] as const
 
 export const reactModules = [
   {
