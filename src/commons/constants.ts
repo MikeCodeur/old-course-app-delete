@@ -4,6 +4,18 @@ export const LOCAL_PATH = `${ROOT_SRC}/clone` as const
 export const REPOSITORY = `github.com/${USER}` as const
 export const DIRECTORY = `${LOCAL_PATH}/src` as const
 
+const versionGit = "2.0" as const
+const versionNode = "18.0.0" as const
+const versionPkg = "8.0.0" as const
+
+export const enCheckVersion = {
+  versionGit,
+  versionNode,
+  versionPkg,
+} as const
+
+export const PACKAGE_MANAGER = ["npm", "pnpm", "yarn", "bun"] as const
+
 export const reactModules = [
   {
     name: "react-prerequis-debutants",
@@ -94,7 +106,7 @@ const typeScriptModules = [
     name: "typescript-testing",
     extrafolders: ["__tests__", "components"],
     dependencies: {
-      dev: ["@testing-library/react", "@testing-library/user-event","ts-node"],
+      dev: ["@testing-library/react", "@testing-library/user-event", "ts-node"],
     },
   },
 ] as const

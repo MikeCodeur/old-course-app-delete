@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { ERROR, enCheckVersion } from "./commons/constants.js"
 import {
   copyExercice,
   copyExtraFiles,
@@ -8,6 +9,7 @@ import {
   getRepository,
   installDependencies,
   throwError,
+  throwErrorCheck,
 } from "./utils/helpers.js"
 import {
   getCoursesNames,
@@ -17,9 +19,9 @@ import {
 } from "./utils/prompts.js"
 import { group, intro, outro, select, spinner } from "@clack/prompts"
 
-import { ERROR } from "./commons/constants.js"
 import { ModuleName } from "./types/courses.js"
 import chalk from "chalk"
+import { envCheck } from "./utils/env.js"
 import fs from "node:fs"
 
 async function main() {
@@ -27,6 +29,24 @@ async function main() {
 
   await group(
     {
+      environnement: async () => {
+        const {versionGit, versionNode, versionPkg} = enCheckVersion
+        const s = spinner()
+        s.start("🔧 Vérification de l'environnement")
+        const checkNode = envCheck.node(versionGit)
+        if (!checkNode) {
+          throwErrorCheck("node", versionNode)
+        }
+        const checkGit = envCheck.git(versionGit)
+        if (!checkGit) {
+          throwErrorCheck("git", versionGit)
+        }
+        const checkPkg = envCheck.packageManager("pnpm", versionPkg)
+        if (!checkPkg) {
+          throwErrorCheck("pnpm", versionPkg)
+        }
+        s.stop("🔧 Environnement OK")
+      },
       course: async () => {
         const coursesNames = getCoursesNames()
         const firstCourse = getFirstOption(coursesNames)
