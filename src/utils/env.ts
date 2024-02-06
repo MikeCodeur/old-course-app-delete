@@ -33,7 +33,8 @@ function checkNode(versions?: string | string[]) {
   if (!match) {
     return false
   }
-  return versions ? checkVersion(versions, node) : true
+  const nodeVersion = match[1] as string
+  return versions ? checkVersion(versions, nodeVersion) : true
 }
 
 function checkPackageManager(
