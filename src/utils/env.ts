@@ -7,6 +7,8 @@ export const envCheck = {
   node: (versions?: string | string[]) => checkNode(versions),
   packageManager: (pkgManager?: PackageManager, versions?: string | string[]) =>
     checkPackageManager(pkgManager, versions),
+  ts: (pkgManager?: PackageManager, versions?: string | string[]) =>
+    checkTypescript(pkgManager, versions),
 }
 
 const checkVersion = (arr: string | string[], value: string) => {
@@ -47,4 +49,22 @@ function checkPackageManager(
     `${pkgManager ?? "npm"} not found`
   )
   return versions ? checkVersion(versions, packageManager) : true
+}
+
+function checkTypescript(
+  pkgManager?: PackageManager,
+  versions?: string | string[]
+) {
+  const typescript = spawnSync(
+    `${pkgManager ?? "npm"} tsc --version`,
+    undefined,
+    "typescript not found"
+  )
+  const versionRegex = /Version (\d+\.\d+\.\d+)/
+  const match = typescript.match(versionRegex)
+  if (!match) {
+    return false
+  }
+  const tsVersion = match[1] as string
+  return versions ? checkVersion(versions, tsVersion) : true
 }

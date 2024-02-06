@@ -30,7 +30,8 @@ async function main() {
   await group(
     {
       environnement: async () => {
-        const { versionGit, versionNode, versionPkg } = enCheckVersion
+        const { versionGit, versionNode, versionPkg, versionTs } =
+          enCheckVersion
         const s = spinner()
         s.start("🔧 Vérification de l'environnement")
         const checkNode = envCheck.node(versionNode)
@@ -44,6 +45,10 @@ async function main() {
         const checkPkg = envCheck.packageManager("pnpm", versionPkg)
         if (!checkPkg) {
           throwErrorCheck("pnpm", versionPkg)
+        }
+        const checkTs = envCheck.ts("pnpm", versionTs)
+        if (!checkTs) {
+          throwErrorCheck("typescript", versionTs)
         }
         s.stop("🔧 Environnement OK")
       },
