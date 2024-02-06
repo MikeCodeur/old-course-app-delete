@@ -5,6 +5,7 @@ import {
   REPOSITORY,
 } from "../commons/constants.js"
 
+import { ChekEnvType } from "../types/helpers.js"
 import { cancel } from "@clack/prompts"
 import { exec } from "child_process"
 import fs from "fs"
@@ -88,4 +89,10 @@ const copySourceFile = (source: string, destination: string) => {
 export const throwError = (error: string | unknown) => {
   cancel(error as string)
   process.exit(1)
+}
+
+export const throwErrorCheck = (chekEnvType: ChekEnvType, version: string) => {
+  throwError(
+    `version de ${chekEnvType} non supporté, version minimun: ${version}`
+  )
 }

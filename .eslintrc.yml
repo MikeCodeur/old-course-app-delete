@@ -14,4 +14,4 @@ plugins:
 rules:
   "@typescript-eslint/no-unused-vars": error
 ignorePatterns:
-  - 'dist/**'
+  - "dist/**"
